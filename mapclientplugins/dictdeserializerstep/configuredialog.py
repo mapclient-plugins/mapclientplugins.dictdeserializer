@@ -1,5 +1,5 @@
 
-
+import os
 from PySide import QtGui
 from mapclientplugins.dictdeserializerstep.ui_configuredialog import Ui_ConfigureDialog
 
@@ -25,11 +25,20 @@ class ConfigureDialog(QtGui.QDialog):
         # Set a place holder for a callable that will get set from the step.
         # We will use this method to decide whether the identifier is unique.
         self.identifierOccursCount = None
+        self._previousLocation = ''
 
         self._makeConnections()
 
     def _makeConnections(self):
-        self._ui.lineEdit0.textChanged.connect(self.validate)
+        self._ui.identifier_lineEdit.textChanged.connect(self.validate)
+        self._ui.input_lineEdit.textChanged.connect(self.validate)
+        self._ui.inputLocation_pushButton.clicked.connect(self._input_location_push_button_clicked)
+
+    def _input_location_push_button_clicked(self):
+        location, _ = QtGui.QFileDialog.getOpenFileName(self, caption='Choose Input File', dir=self._previousLocation)
+        if location:
+            self._previousLocation = os.path.dirname(location)
+            self._ui.input_lineEdit.setText(location)
 
     def accept(self):
         """
@@ -53,34 +62,43 @@ class ConfigureDialog(QtGui.QDialog):
         """
         # Determine if the current identifier is unique throughout the workflow
         # The identifierOccursCount method is part of the interface to the workflow framework.
-        value = self.identifierOccursCount(self._ui.lineEdit0.text())
-        valid = (value == 0) or (value == 1 and self._previousIdentifier == self._ui.lineEdit0.text())
-        if valid:
-            self._ui.lineEdit0.setStyleSheet(DEFAULT_STYLE_SHEET)
-        else:
-            self._ui.lineEdit0.setStyleSheet(INVALID_STYLE_SHEET)
+        sender = self.sender()
+        input_location_valid = False
+        input_location = self._ui.input_lineEdit.text()
 
-        return valid
+        if os.path.isfile(input_location):
+            input_location_valid = True
+            self._ui.input_lineEdit.setStyleSheet(DEFAULT_STYLE_SHEET)
+        else:
+            self._ui.input_lineEdit.setStyleSheet(INVALID_STYLE_SHEET)
+
+        value = self.identifierOccursCount(self._ui.identifier_lineEdit.text())
+        valid = (value == 0) or (value == 1 and self._previousIdentifier == self._ui.identifier_lineEdit.text())
+        if valid:
+            self._ui.identifier_lineEdit.setStyleSheet(DEFAULT_STYLE_SHEET)
+        else:
+            self._ui.identifier_lineEdit.setStyleSheet(INVALID_STYLE_SHEET)
+
+        return valid and input_location_valid
 
     def getConfig(self):
-        '''
+        """
         Get the current value of the configuration from the dialog.  Also
         set the _previousIdentifier value so that we can check uniqueness of the
         identifier over the whole of the workflow.
-        '''
-        self._previousIdentifier = self._ui.lineEdit0.text()
-        config = {}
-        config['identifier'] = self._ui.lineEdit0.text()
-        config['input'] = self._ui.lineEdit1.text()
+        """
+        self._previousIdentifier = self._ui.identifier_lineEdit.text()
+        config = {'identifier': self._ui.identifier_lineEdit.text(),
+                  'input': self._ui.input_lineEdit.text()}
         return config
 
     def setConfig(self, config):
-        '''
+        """
         Set the current value of the configuration for the dialog.  Also
         set the _previousIdentifier value so that we can check uniqueness of the
         identifier over the whole of the workflow.
-        '''
+        """
         self._previousIdentifier = config['identifier']
-        self._ui.lineEdit0.setText(config['identifier'])
-        self._ui.lineEdit1.setText(config['input'])
+        self._ui.identifier_lineEdit.setText(config['identifier'])
+        self._ui.input_lineEdit.setText(config['input'])
 

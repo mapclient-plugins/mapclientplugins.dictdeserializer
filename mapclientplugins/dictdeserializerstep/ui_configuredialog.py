@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\hsor001\Desktop\mapclient-sparc-plugins\mapclientplugins.dictdeserializerstep\mapclientplugins\dictdeserializerstep\qt\configuredialog.ui'
+# Form implementation generated from reading ui file 'mapclientplugins\dictdeserializerstep\qt\configuredialog.ui'
 #
-# Created: Thu Sep 27 11:29:29 2018
+# Created: Thu Sep 27 12:05:49 2018
 #      by: pyside-uic 0.2.15 running on PySide 1.2.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -15,29 +15,42 @@ class Ui_ConfigureDialog(object):
         ConfigureDialog.resize(418, 303)
         self.gridLayout = QtGui.QGridLayout(ConfigureDialog)
         self.gridLayout.setObjectName("gridLayout")
-        self.configGroupBox = QtGui.QGroupBox(ConfigureDialog)
-        self.configGroupBox.setTitle("")
-        self.configGroupBox.setObjectName("configGroupBox")
-        self.formLayout = QtGui.QFormLayout(self.configGroupBox)
-        self.formLayout.setObjectName("formLayout")
-        self.label0 = QtGui.QLabel(self.configGroupBox)
-        self.label0.setObjectName("label0")
-        self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.label0)
-        self.lineEdit0 = QtGui.QLineEdit(self.configGroupBox)
-        self.lineEdit0.setObjectName("lineEdit0")
-        self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.lineEdit0)
-        self.label1 = QtGui.QLabel(self.configGroupBox)
-        self.label1.setObjectName("label1")
-        self.formLayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.label1)
-        self.lineEdit1 = QtGui.QLineEdit(self.configGroupBox)
-        self.lineEdit1.setObjectName("lineEdit1")
-        self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.lineEdit1)
-        self.gridLayout.addWidget(self.configGroupBox, 0, 0, 1, 1)
         self.buttonBox = QtGui.QDialogButtonBox(ConfigureDialog)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
-        self.gridLayout.addWidget(self.buttonBox, 1, 0, 1, 1)
+        self.gridLayout.addWidget(self.buttonBox, 2, 0, 1, 1)
+        self.configGroupBox = QtGui.QGroupBox(ConfigureDialog)
+        self.configGroupBox.setTitle("")
+        self.configGroupBox.setObjectName("configGroupBox")
+        self.formLayout = QtGui.QFormLayout(self.configGroupBox)
+        self.formLayout.setFieldGrowthPolicy(QtGui.QFormLayout.AllNonFixedFieldsGrow)
+        self.formLayout.setObjectName("formLayout")
+        self.identifer_label = QtGui.QLabel(self.configGroupBox)
+        self.identifer_label.setObjectName("identifer_label")
+        self.formLayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.identifer_label)
+        self.identifier_lineEdit = QtGui.QLineEdit(self.configGroupBox)
+        self.identifier_lineEdit.setObjectName("identifier_lineEdit")
+        self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.identifier_lineEdit)
+        self.input_label = QtGui.QLabel(self.configGroupBox)
+        self.input_label.setObjectName("input_label")
+        self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.input_label)
+        self.frame = QtGui.QFrame(self.configGroupBox)
+        self.frame.setFrameShape(QtGui.QFrame.StyledPanel)
+        self.frame.setFrameShadow(QtGui.QFrame.Raised)
+        self.frame.setObjectName("frame")
+        self.horizontalLayout = QtGui.QHBoxLayout(self.frame)
+        self.horizontalLayout.setSpacing(4)
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.input_lineEdit = QtGui.QLineEdit(self.frame)
+        self.input_lineEdit.setObjectName("input_lineEdit")
+        self.horizontalLayout.addWidget(self.input_lineEdit)
+        self.inputLocation_pushButton = QtGui.QPushButton(self.frame)
+        self.inputLocation_pushButton.setObjectName("inputLocation_pushButton")
+        self.horizontalLayout.addWidget(self.inputLocation_pushButton)
+        self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.frame)
+        self.gridLayout.addWidget(self.configGroupBox, 1, 0, 1, 1)
 
         self.retranslateUi(ConfigureDialog)
         QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL("accepted()"), ConfigureDialog.accept)
@@ -46,6 +59,7 @@ class Ui_ConfigureDialog(object):
 
     def retranslateUi(self, ConfigureDialog):
         ConfigureDialog.setWindowTitle(QtGui.QApplication.translate("ConfigureDialog", "Configure Step", None, QtGui.QApplication.UnicodeUTF8))
-        self.label0.setText(QtGui.QApplication.translate("ConfigureDialog", "identifier:  ", None, QtGui.QApplication.UnicodeUTF8))
-        self.label1.setText(QtGui.QApplication.translate("ConfigureDialog", "input:  ", None, QtGui.QApplication.UnicodeUTF8))
+        self.identifer_label.setText(QtGui.QApplication.translate("ConfigureDialog", "identifier:  ", None, QtGui.QApplication.UnicodeUTF8))
+        self.input_label.setText(QtGui.QApplication.translate("ConfigureDialog", "input:  ", None, QtGui.QApplication.UnicodeUTF8))
+        self.inputLocation_pushButton.setText(QtGui.QApplication.translate("ConfigureDialog", "...", None, QtGui.QApplication.UnicodeUTF8))
 

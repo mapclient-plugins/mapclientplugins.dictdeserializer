@@ -29,9 +29,7 @@ class dictdeserializerStep(WorkflowStepMountPoint):
         # Port data:
         self._portData0 = None # http://physiomeproject.org/workflow/1.0/rdf-schema#dict
         # Config:
-        self._config = {}
-        self._config['identifier'] = ''
-        self._config['input'] = ''
+        self._config = {'identifier': '', 'input': ''}
 
     def execute(self):
         """
@@ -40,6 +38,11 @@ class dictdeserializerStep(WorkflowStepMountPoint):
         may be connected up to a button in a widget for example.
         """
         # Put your execute step code here before calling the '_doneExecution' method.
+
+        with open(self._config['input']) as f:
+            content = f.read()
+            self._portData0 = json.loads(content)
+
         self._doneExecution()
 
     def getPortData(self, index):
