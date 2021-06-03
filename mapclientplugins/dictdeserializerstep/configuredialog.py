@@ -1,4 +1,3 @@
-
 import os
 from PySide2 import QtWidgets
 from mapclientplugins.dictdeserializerstep.ui_configuredialog import Ui_ConfigureDialog
@@ -35,7 +34,8 @@ class ConfigureDialog(QtWidgets.QDialog):
         self._ui.inputLocation_pushButton.clicked.connect(self._input_location_push_button_clicked)
 
     def _input_location_push_button_clicked(self):
-        location, _ = QtWidgets.QFileDialog.getOpenFileName(self, caption='Choose Input File', dir=self._previousLocation)
+        location, _ = QtWidgets.QFileDialog.getOpenFileName(self, caption='Choose Input File',
+                                                            dir=self._previousLocation)
         if location:
             self._previousLocation = os.path.dirname(location)
             self._ui.input_lineEdit.setText(location)
@@ -48,8 +48,9 @@ class ConfigureDialog(QtWidgets.QDialog):
         result = QtWidgets.QMessageBox.Yes
         if not self.validate():
             result = QtWidgets.QMessageBox.warning(self, 'Invalid Configuration',
-                'This configuration is invalid.  Unpredictable behaviour may result if you choose \'Yes\', are you sure you want to save this configuration?)',
-                QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
+                                                   'This configuration is invalid.  Unpredictable behaviour may result if you choose \'Yes\', are you sure you want to save this configuration?)',
+                                                   QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
+                                                   QtWidgets.QMessageBox.No)
 
         if result == QtWidgets.QMessageBox.Yes:
             QtWidgets.QDialog.accept(self)
@@ -101,4 +102,3 @@ class ConfigureDialog(QtWidgets.QDialog):
         self._previousIdentifier = config['identifier']
         self._ui.identifier_lineEdit.setText(config['identifier'])
         self._ui.input_lineEdit.setText(config['input'])
-
