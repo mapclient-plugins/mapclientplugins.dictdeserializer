@@ -1,10 +1,9 @@
-
 """
 MAP Client Plugin Step
 """
 import json
 
-from PySide import QtGui
+from PySide2 import QtGui
 
 from mapclient.mountpoints.workflowstep import WorkflowStepMountPoint
 from mapclientplugins.dictdeserializerstep.configuredialog import ConfigureDialog
@@ -18,16 +17,16 @@ class dictdeserializerStep(WorkflowStepMountPoint):
 
     def __init__(self, location):
         super(dictdeserializerStep, self).__init__('dictdeserializer', location)
-        self._configured = False # A step cannot be executed until it has been configured.
+        self._configured = False  # A step cannot be executed until it has been configured.
         self._category = 'Source'
         # Add any other initialisation code here:
-        self._icon =  QtGui.QImage(':/dictdeserializerstep/images/data-source.png')
+        self._icon = QtGui.QImage(':/dictdeserializerstep/images/data-source.png')
         # Ports:
         self.addPort(('http://physiomeproject.org/workflow/1.0/rdf-schema#port',
                       'http://physiomeproject.org/workflow/1.0/rdf-schema#provides',
                       'http://physiomeproject.org/workflow/1.0/rdf-schema#dict'))
         # Port data:
-        self._portData0 = None # http://physiomeproject.org/workflow/1.0/rdf-schema#dict
+        self._portData0 = None  # http://physiomeproject.org/workflow/1.0/rdf-schema#dict
         # Config:
         self._config = {'identifier': '', 'input': ''}
 
@@ -53,7 +52,7 @@ class dictdeserializerStep(WorkflowStepMountPoint):
 
         :param index: Index of the port to return.
         """
-        return self._portData0 # http://physiomeproject.org/workflow/1.0/rdf-schema#dict
+        return self._portData0  # http://physiomeproject.org/workflow/1.0/rdf-schema#dict
 
     def configure(self):
         """
@@ -107,5 +106,3 @@ class dictdeserializerStep(WorkflowStepMountPoint):
         d.identifierOccursCount = self._identifierOccursCount
         d.setConfig(self._config)
         self._configured = d.validate()
-
-
