@@ -23,7 +23,7 @@ source_license = readfile("LICENSE")
 
 
 setup(name='mapclientplugins.dictdeserializerstep',
-    version='0.1.0',
+    version='0.2.0',
     description='',
     long_description='\n'.join(readme) + source_license,
     classifiers=[
