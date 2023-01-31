@@ -16,7 +16,7 @@ class dictdeserializerStep(WorkflowStepMountPoint):
     """
 
     def __init__(self, location):
-        super(dictdeserializerStep, self).__init__('dictdeserializer', location)
+        super(dictdeserializerStep, self).__init__('Dict Deserializer', location)
         self._configured = False  # A step cannot be executed until it has been configured.
         self._category = 'Source'
         # Add any other initialisation code here:
