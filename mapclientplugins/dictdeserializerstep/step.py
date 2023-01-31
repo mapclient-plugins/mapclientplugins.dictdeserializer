@@ -3,20 +3,20 @@ MAP Client Plugin Step
 """
 import json
 
-from PySide2 import QtGui
+from PySide6 import QtGui
 
 from mapclient.mountpoints.workflowstep import WorkflowStepMountPoint
 from mapclientplugins.dictdeserializerstep.configuredialog import ConfigureDialog
 
 
-class dictdeserializerStep(WorkflowStepMountPoint):
+class DictDeserializerStep(WorkflowStepMountPoint):
     """
     Skeleton step which is intended to be a helpful starting point
     for new steps.
     """
 
     def __init__(self, location):
-        super(dictdeserializerStep, self).__init__('Dict Deserializer', location)
+        super(DictDeserializerStep, self).__init__('Dict Deserializer', location)
         self._configured = False  # A step cannot be executed until it has been configured.
         self._category = 'Source'
         # Add any other initialisation code here:
@@ -68,7 +68,7 @@ class dictdeserializerStep(WorkflowStepMountPoint):
         dlg.validate()
         dlg.setModal(True)
 
-        if dlg.exec_():
+        if dlg.exec():
             self._config = dlg.getConfig()
 
         self._configured = dlg.validate()
